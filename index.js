@@ -17,13 +17,13 @@ app.use(bodyParser.json())
 
 // Index route
 app.get('/', (req, res) => {
-  res.send('315675048')
+  res.send('Heya, I\'m your new chat bot!')
 })
 
 // Facebook verification
 app.get('/webhook/', (req, res) => {
-  if (req.query['hub.verify_token'] === 'my_voice_is_my_password_verify_me') {
-    res.send(req.query['hub.challenge'])
+  if (req.query['hub_verify_token'] === 'my_voice_is_my_password_verify_me') {
+    res.send(req.query['hub_challenge'])
   }
   res.send('Error, wrong token')
 })
