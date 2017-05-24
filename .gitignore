@@ -4,7 +4,7 @@ bower_components/
 *.DS_Store
 
 # Compiled Dirs (http://nodejs.org/api/addons.html)
-src/public/
+client/public/
 
 # ENV
 .env
