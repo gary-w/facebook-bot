@@ -6,5 +6,6 @@ bower_components/
 # Compiled Dirs (http://nodejs.org/api/addons.html)
 client/public/
 
-# ENV
-.env
+# NodeEnv
+env
+env-copy
