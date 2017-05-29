@@ -106,7 +106,7 @@ function activeToDo(sender) {
     sendTextMessage(sender, list)
   })
   .catch((error) => {
-    console.log('Error', error)
+    console.log('To do list Error', error)
   })
 }
 
@@ -124,7 +124,7 @@ function addItem(sender, item) {
     return db.query('INSERT INTO todo (item, user_id) VALUES ($1, $2)', [item, user_id])
   })
   .catch((error) => {
-    console.log('Error', error)
+    console.log('Add item Error', error)
   })
 }
 
