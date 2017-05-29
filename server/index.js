@@ -95,7 +95,7 @@ function sendTextMessage(sender, text) {
 }
 
 function activeToDo(sender) {
-  let list = db.query('SELECT * FROM todo WHERE status = TRUE')
+  let list = db.query('SELECT * FROM todo WHERE status = FALSE')
   sendTextMessage(sender, `Here is the ${list}!`)
 }
 
