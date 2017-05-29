@@ -3,7 +3,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const request = require('request')
-const db = require('./database/index.js')
+const { db } = require('../database/index.js')
 const pgp = require('pg-promise')();
 const app = express()
 
