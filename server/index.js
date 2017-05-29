@@ -43,20 +43,21 @@ app.post('/webhook/', (req, res) => {
     if (event.message && event.message.text) {
       let text = event.message.text
       
-      sendTextMessage(sender, text.substring(0, 200))
-      // User asks for active to-do list
-      if (text === 'LIST'){ 
-        activeToDo(sender)
-        break
-      // User marks a certain to-do list item as DONE
-      } else if (text === `${itemNumber} DONE`) {
-        markAsDone(sender, itemNumber)
-        break
-      // User adds an item to the to-do list
-      } else if (text === `ADD ${item}`) {
-        addItem(sender, item)
-        break
-      }
+      sendTextMessage(sender, text.substring(0, 200));
+      break;
+      // // User asks for active to-do list
+      // if (text === 'LIST'){ 
+      //   activeToDo(sender)
+      //   break
+      // // User marks a certain to-do list item as DONE
+      // } else if (text === `${itemNumber} DONE`) {
+      //   markAsDone(sender, itemNumber)
+      //   break
+      // // User adds an item to the to-do list
+      // } else if (text === `ADD ${item}`) {
+      //   addItem(sender, item)
+      //   break
+      // }
       // User marks the whole list as DONE
       // } else if (text === 'LIST DONE') {
       //   markAllDone(sender)
