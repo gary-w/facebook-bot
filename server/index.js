@@ -98,14 +98,13 @@ function sendTextMessage(sender, text) {
 }
 
 function activeToDo(sender) {
-  // return db.query('SELECT id FROM users WHERE usertoken = $1 RETURNING id', [sender])
-  // .then((user_id) => {
-  //   return db.query('SELECT item FROM todo WHERE status = FALSE AND user_id = $1', [user_id])
-  // })
-  // .then((list) => {
-  //   sendTextMessage(sender, list)
-  // })
-  return sendTextMessage(sender, 'hello')
+  return db.query('SELECT id FROM users WHERE usertoken = $1 RETURNING id', [sender])
+  .then((user_id) => {
+    return db.query('SELECT item FROM todo WHERE status = FALSE AND user_id = $1', [user_id])
+  })
+  .then((list) => {
+    sendTextMessage(sender, list)
+  })
 }
 
 function markAsDone(sender, itemNumber) {
