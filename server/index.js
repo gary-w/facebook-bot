@@ -46,19 +46,19 @@ app.post('/webhook/', (req, res) => {
       // User asks for active to-do list
       if (text === 'LIST'){ 
         activeToDo(sender)
-        continue
+        break
       // User marks a certain to-do list item as DONE
       } else if (text === `${itemNumber} DONE`) {
         markAsDone(sender, itemNumber)
-        continue
+        break
       // User adds an item to the to-do list
       } else if (text === `ADD ${item}`) {
         addItem(sender, item)
-        continue
+        break
       // User marks the whole list as DONE
       } else if (text === 'LIST DONE') {
         markAllDone(sender)
-        continue
+        break
       }
 
       sendTextMessage(sender, text.substring(0, 200))
@@ -95,25 +95,26 @@ function sendTextMessage(sender, text) {
 }
 
 function activeToDo(sender) {
-  // let list = db.query('SELECT * FROM todo WHERE status = FALSE')
-
-
-
-  sendTextMessage(sender, sender)
+  return db.query('SELECT id FROM users WHERE usertoken = $1 RETURNING id', [sender])
+  .then((user_id) => {
+    return db.query('SELECT item FROM todo WHERE status = FALSE AND user_id = $1', [user_id])
+  })
+  .then((list) => {
+    sendTextMessage(sender, list)
+  })
 }
 
 function markAsDone(sender, itemNumber) {
   sendTextMessage(sender, `${itemNumber} done!`)
-  // return db.one(
-  //   'UPDATE todo SET order_status = $1\
-  //    WHERE order_id = $2\
-  //    RETURNING vendor_id\
-  //   ', [int, order_id]);
+  return db.query('UPDATE todo SET status = TRUE WHERE id = $1', [itemNumber])
 }
 
 function addItem(sender, item) {
   sendTextMessage(sender, `${item} added!`)
-  // return db.query('INSERT INTO todo VALUES item')
+  return db.query('INSERT INTO users (usertoken) VALUES ($1) RETURNING id', [sender])
+  .then((user_id) => {
+    return db.query('INSERT INTO todo (item, user_id) VALUES ($1, $2)', [item, user_id])
+  });
 }
 
 function markAllDone(sender) {
