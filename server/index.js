@@ -96,7 +96,10 @@ function sendTextMessage(sender, text) {
 
 function activeToDo(sender) {
   // let list = db.query('SELECT * FROM todo WHERE status = FALSE')
-  sendTextMessage(sender, `Here is the ${list}!`)
+
+
+
+  sendTextMessage(sender, sender)
 }
 
 function markAsDone(sender, itemNumber) {
@@ -115,6 +118,7 @@ function addItem(sender, item) {
 
 function markAllDone(sender) {
   sendTextMessage(sender, 'All done!')
+  return db.query('UPDATE todo SET status = TRUE')
 }
 
 // Start server
