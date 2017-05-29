@@ -50,12 +50,15 @@ app.post('/webhook/', (req, res) => {
       // User marks a certain to-do list item as DONE
       } else if (text === `${itemNumber} DONE`) {
         markAsDone(sender, itemNumber)
+        continue
       // User adds an item to the to-do list
       } else if (text === `ADD ${item}`) {
         addItem(sender, item)
+        continue
       // User marks the whole list as DONE
       } else if (text === 'LIST DONE') {
         markAllDone(sender)
+        continue
       }
 
       sendTextMessage(sender, text.substring(0, 200))
