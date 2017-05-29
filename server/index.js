@@ -104,6 +104,9 @@ function activeToDo(sender) {
   .then((list) => {
     sendTextMessage(sender, list)
   })
+  .catch((error) {
+    console.log('Error', error)
+  })
 }
 
 // Function for user to mark items as complete
@@ -118,7 +121,10 @@ function addItem(sender, item) {
   return db.query('INSERT INTO users (usertoken) VALUES ($1) RETURNING id', [sender])
   .then((user_id) => {
     return db.query('INSERT INTO todo (item, user_id) VALUES ($1, $2)', [item, user_id])
-  });
+  })
+  .catch((error) {
+    console.log('Error', error)
+  })
 }
 
 // Function for all items on to-do to be marked as done
