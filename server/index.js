@@ -26,9 +26,9 @@ app.get('/', (req, res) => {
 // Facebook verification
 app.get('/webhook/', (req, res) => {
   if (req.query['hub.verify_token'] === 'my_voice_is_my_password_verify_me') {
-    res.send(req.query['hub.challenge'])
+    res.status(200).send(req.query['hub.challenge'])
   }
-  res.send('Error, wrong token')
+  res.status(403).send('Error, wrong token')
 })
 
 // Post data to Facebook
