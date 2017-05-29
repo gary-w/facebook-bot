@@ -55,11 +55,12 @@ app.post('/webhook/', (req, res) => {
       } else if (text === `ADD ${item}`) {
         addItem(sender, item)
         break
-      // User marks the whole list as DONE
-      } else if (text === 'LIST DONE') {
-        markAllDone(sender)
-        break
       }
+      // User marks the whole list as DONE
+      // } else if (text === 'LIST DONE') {
+      //   markAllDone(sender)
+      //   break
+      // }
 
       sendTextMessage(sender, text.substring(0, 200))
     }
