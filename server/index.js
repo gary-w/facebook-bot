@@ -99,6 +99,10 @@ function sendTextMessage(sender, text) {
 
 // Function to return active to-do items with the same user_id as the sender
 function activeToDo(sender) {
+  return db.query('SELECT * FROM users')
+  .then((result) => {
+    sendTextMessage(sender, 'Hello' + result)
+  })
   // return db.query('SELECT id FROM users WHERE usertoken = $1 RETURNING id', [sender])
   // .then((user_id) => {
   //   return db.query('SELECT item FROM todo WHERE status = FALSE AND user_id = $1', [user_id])
@@ -106,7 +110,6 @@ function activeToDo(sender) {
   // .then((list) => {
   //   sendTextMessage(sender, list)
   // })
-  sendTextMessage(sender, 'Hello')
 }
 
 // Function for user to mark items as complete
