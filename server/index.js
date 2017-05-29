@@ -73,25 +73,26 @@ const token = process.env.FB_PAGE_TOKEN
 
 // Function to echo back messages
 function sendTextMessage(sender, text) {
-    let messageData = { text:text + 'this is great' }
-    request({
-      url: 'https://graph.facebook.com/v2.6/me/messages',
-      qs: {access_token:token},
-      method: 'POST',
-    json: {
-        recipient: {id:sender},
-      message: messageData,
+  let messageData = { text:text + 'this is great' }
+  request({
+    url: 'https://graph.facebook.com/v2.6/me/messages',
+    qs: {access_token:token},
+    method: 'POST',
+  json: {
+      recipient: {id:sender},
+    message: messageData,
+  }
+}, function(error, response, body) {
+  if (error) {
+      console.log('Error sending messages: ', error)
+  } else if (response.body.error) {
+      console.log('Error: ', response.body.error)
     }
-  }, function(error, response, body) {
-    if (error) {
-        console.log('Error sending messages: ', error)
-    } else if (response.body.error) {
-        console.log('Error: ', response.body.error)
-      }
-    })
+  })
 }
 
 function activeToDo(sender) {
+  sendTextMessage(sender, 'Here is the list!')
   console.log('Here is the list!')
 }
 
