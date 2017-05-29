@@ -96,7 +96,7 @@ function sendTextMessage(sender, text) {
 
 // Function to return active to-do items with the same user_id as the sender
 function activeToDo(sender) {
-  return db.query('SELECT id FROM users WHERE usertoken = $1 RETURNING id', [sender])
+  return db.query('SELECT id FROM users WHERE usertoken = $1', [sender])
   .then((user_id) => {
     sendTextMessage(sender, user_id)
     return db.query('SELECT item FROM todo WHERE status = FALSE AND user_id = $1', [user_id])
