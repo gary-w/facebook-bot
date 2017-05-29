@@ -4,9 +4,10 @@ module.exports = (db) => {
     username VARCHAR(80) UNIQUE \
     );')    
   .then(() => {
-  return db.query('CREATE TABLE IF NOT EXISTS address(\
-    address_id SERIAL PRIMARY KEY, \
-    full_address VARCHAR(500) NOT NULL, \
+  return db.query('CREATE TABLE IF NOT EXISTS todo(\
+    id SERIAL PRIMARY KEY, \
+    item VARCHAR(500) NOT NULL, \
+    status BOOLEAN NOT NULL DEFAULT FALSE, \
     user_id INTEGER REFERENCES users (user_id) \
     );')    
   })
