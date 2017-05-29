@@ -9,3 +9,6 @@ client/public/
 # NodeEnv
 env
 env-copy
+
+#NPM
+npm-debug.log
