@@ -82,7 +82,7 @@ function sendTextMessage(sender, text) {
     qs: {access_token:token},
     method: 'POST',
   json: {
-      recipient: {id:sender},
+    recipient: {id:sender},
     message: messageData,
   }
 }, function(error, response, body) {
@@ -100,6 +100,7 @@ function activeToDo(sender) {
   .then((user_id) => {
     return db.query('SELECT item FROM todo WHERE status = FALSE AND user_id = $1', [user_id])
   })
+  // TO DO: Running into some issues regarding the data type of the items being returned from the database
   .then((list) => {
     sendTextMessage(sender, list)
   })
@@ -117,6 +118,7 @@ function markAsDone(sender, itemNumber) {
 // Function to add item to to-do list
 function addItem(sender, item) {
   sendTextMessage(sender, `${item} added!`)
+  // TO DO: Running into errors as I'm inserting the user token each time an item is added but this should be a separate query performed only once when the conversation starts with the unique user
   return db.query('INSERT INTO users (usertoken) VALUES ($1) RETURNING id', [sender])
   .then((user_id) => {
     return db.query('INSERT INTO todo (item, user_id) VALUES ($1, $2)', [item, user_id])
