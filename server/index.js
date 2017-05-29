@@ -43,12 +43,13 @@ app.post('/webhook/', (req, res) => {
     if (event.message && event.message.text) {
       let text = event.message.text
       
-      sendTextMessage(sender, text.substring(0, 200));
-      break;
-      // // User asks for active to-do list
-      // if (text === 'LIST'){ 
-      //   activeToDo(sender)
-      //   break
+      // sendTextMessage(sender, text.substring(0, 200));
+      // break;
+      // User asks for active to-do list
+      if (text === 'LIST'){ 
+        activeToDo(sender)
+        break
+      }
       // // User marks a certain to-do list item as DONE
       // } else if (text === `${itemNumber} DONE`) {
       //   markAsDone(sender, itemNumber)
@@ -97,13 +98,14 @@ function sendTextMessage(sender, text) {
 }
 
 function activeToDo(sender) {
-  return db.query('SELECT id FROM users WHERE usertoken = $1 RETURNING id', [sender])
-  .then((user_id) => {
-    return db.query('SELECT item FROM todo WHERE status = FALSE AND user_id = $1', [user_id])
-  })
-  .then((list) => {
-    sendTextMessage(sender, list)
-  })
+  // return db.query('SELECT id FROM users WHERE usertoken = $1 RETURNING id', [sender])
+  // .then((user_id) => {
+  //   return db.query('SELECT item FROM todo WHERE status = FALSE AND user_id = $1', [user_id])
+  // })
+  // .then((list) => {
+  //   sendTextMessage(sender, list)
+  // })
+  return sendTextMessage(sender, 'hello')
 }
 
 function markAsDone(sender, itemNumber) {
