@@ -56,7 +56,7 @@ app.post('/webhook/', (req, res) => {
         addItem(sender, item)
         break
       }
-      User marks the whole list as DONE
+      // User marks the whole list as DONE
       } else if (text === 'LIST DONE') {
         markAllDone(sender)
         break
