@@ -59,7 +59,7 @@ const token = process.env.FB_PAGE_TOKEN
 
 // Function to echo back messages
 function sendTextMessage(sender, text) {
-    let messageData = { text:text }
+    let messageData = { text:text + 'this is great' }
     request({
       url: 'https://graph.facebook.com/v2.6/me/messages',
       qs: {access_token:token},
