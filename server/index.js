@@ -95,7 +95,7 @@ function sendTextMessage(sender, text) {
 }
 
 function activeToDo(sender) {
-  let list = db.query('SELECT * FROM todo WHERE status = FALSE')
+  // let list = db.query('SELECT * FROM todo WHERE status = FALSE')
   sendTextMessage(sender, `Here is the ${list}!`)
 }
 
@@ -110,7 +110,7 @@ function markAsDone(sender, itemNumber) {
 
 function addItem(sender, item) {
   sendTextMessage(sender, `${item} added!`)
-  return db.query('INSERT INTO todo VALUES item')
+  // return db.query('INSERT INTO todo VALUES item')
 }
 
 function markAllDone(sender) {
