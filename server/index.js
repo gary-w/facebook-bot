@@ -104,7 +104,7 @@ function activeToDo(sender) {
   })
   // TO DO: Running into some issues regarding the data type of the items being returned from the database
   .then((list) => {
-    sendTextMessage(sender, list + 'empty hello')
+    sendTextMessage(sender, 'empty hello')
   })
   .catch((error) => {
     console.log('To do list Error', error)
