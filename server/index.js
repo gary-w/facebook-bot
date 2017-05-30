@@ -89,13 +89,14 @@ function sendTextMessage(sender, text) {
   if (error) {
       console.log('Error sending messages: ', error)
   } else if (response.body.error) {
-      console.log('Error: ', response.body.error)
+      console.log('Send message error: ', response.body.error)
     }
   })
 }
 
 // Function to return active to-do items with the same user_id as the sender
 function activeToDo(sender) {
+  sendTextMessage(sender, sender)
   return db.query('SELECT id FROM users WHERE usertoken = $1', [sender])
   .then((user_id) => {
     sendTextMessage(sender, user_id)
@@ -103,7 +104,7 @@ function activeToDo(sender) {
   })
   // TO DO: Running into some issues regarding the data type of the items being returned from the database
   .then((list) => {
-    sendTextMessage(sender, list)
+    sendTextMessage(sender, list + 'empty hello')
   })
   .catch((error) => {
     console.log('To do list Error', error)
