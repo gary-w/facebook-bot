@@ -42,7 +42,8 @@ app.post('/webhook/', (req, res) => {
     let sender = event.sender.id
     if (event.message && event.message.text) {
       let text = event.message.text
-      
+      // Store user details in database
+      let userID = addUser(sender)
       // User asks for active to-do list
       if (text === 'LIST'){ 
         activeToDo(sender)
@@ -94,6 +95,11 @@ function sendTextMessage(sender, text) {
   })
 }
 
+// Function to add current active user's details to user table
+function addUser(sender) {
+  return db.query('INSERT INTO users (usertoken) VALUES ($1) ON CONFLICT (usertoken) DO NOTHING RETURNING id', [sender])
+}
+
 // Function to return active to-do items with the same user_id as the sender
 function activeToDo(sender) {
   return db.query('SELECT id FROM users WHERE usertoken = $1', [sender])
@@ -120,10 +126,7 @@ function markAsDone(sender, itemNumber) {
 // Function to add item to to-do list
 function addItem(sender, item) {
   sendTextMessage(sender, `${item} added!`)
-  // TO DO: Running into errors as I'm inserting the user token each time an item is added but this should be a separate query performed only once when the conversation starts with the unique user
-  return db.query('INSERT INTO users (usertoken) VALUES ($1) RETURNING id', [sender])
-  .then((user_id) => {
-    return db.query('INSERT INTO todo (item, user_id) VALUES ($1, $2)', [item, user_id])
+  return db.query('INSERT INTO todo (item, user_id) VALUES ($1, $2)', [item, user_id])
   })
   .catch((error) => {
     console.log('Add item Error', error)
