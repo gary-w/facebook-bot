@@ -98,7 +98,8 @@ function sendTextMessage(sender, text) {
 function activeToDo(sender) {
   return db.query('SELECT id FROM users WHERE usertoken = $1', [sender])
   .then((user_id) => {
-    sendTextMessage(sender, user_id)
+    let id = parseInt(user_id)
+    sendTextMessage(sender, id)
     return db.query('SELECT item FROM todo WHERE status = FALSE AND user_id = $1', [user_id])
   })
   // TO DO: Running into some issues regarding the data type of the items being returned from the database
