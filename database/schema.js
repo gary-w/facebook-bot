@@ -8,14 +8,12 @@ module.exports = (db) => {
     id SERIAL PRIMARY KEY, \
     item VARCHAR(500) NOT NULL, \
     status BOOLEAN NOT NULL DEFAULT FALSE, \
-    user_id INTEGER NOT NULL \
+    user_id INTEGER REFERENCES users(id) \
     );')    
   })
   .catch((error) => {
     console.log('There is an error: ', error);
   });
 };
-
-// TO DO: The foreign key was causing bugs, have removed it will look at reintroducing it when I have time
 
 
