@@ -43,7 +43,7 @@ app.post('/webhook/', (req, res) => {
     if (event.message && event.message.text) {
       let text = event.message.text
       // // Store user details in database
-      // let userID = addUser(sender)
+      addUser(sender)
       // User asks for active to-do list
       if (text === 'LIST'){ 
         activeToDo(sender)
@@ -125,7 +125,7 @@ function markAsDone(sender, itemNumber) {
 
 // Function to add item to to-do list
 function addItem(sender, item) {
-  return db.query('INSERT INTO users (usertoken) VALUES ($1) ON CONFLICT (usertoken) DO NOTHING RETURNING id', [sender])
+  return db.one('SELECT id FROM users WHERE usertoken = $1', sender)
   .then((result) => {
     console.log('this is the id', result)
     return db.one('INSERT INTO todo(item, user_id) VALUES ($1, $2) RETURNING item', [item, result])
