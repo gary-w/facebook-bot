@@ -104,6 +104,7 @@ function addUser(sender) {
 function activeToDo(sender) {
   return db.query('SELECT id FROM users WHERE usertoken = $1', [sender])
   .then((result) => {
+    console.log('result', result)
     let id = parseInt(result.id)
     console.log('id', id)
     sendTextMessage(sender, id)
