@@ -42,8 +42,8 @@ app.post('/webhook/', (req, res) => {
     let sender = event.sender.id
     if (event.message && event.message.text) {
       let text = event.message.text
-      // Store user details in database
-      let userID = addUser(sender)
+      // // Store user details in database
+      // let userID = addUser(sender)
       // User asks for active to-do list
       if (text === 'LIST'){ 
         activeToDo(sender)
@@ -126,7 +126,7 @@ function markAsDone(sender, itemNumber) {
 // Function to add item to to-do list
 function addItem(sender, item) {
   sendTextMessage(sender, `${item} added!`)
-  return db.query('INSERT INTO todo (item, user_id) VALUES ($1, $2)', [item, user_id])
+  return db.query('INSERT INTO todo (item) VALUES ($1)', [item])
   .catch((error) => {
     console.log('Add item Error', error)
   })
