@@ -104,19 +104,16 @@ function addUser(sender) {
 function activeToDo(sender) {
   return db.query('SELECT id FROM users WHERE usertoken = $1', [sender])
   .then((result) => {
-    console.log(result)
-    console.log('result', result[0].id)
     let id = parseInt(result[0].id)
-    console.log('id', id)
-    sendTextMessage(sender, id)
     return db.query('SELECT item FROM todo WHERE status = FALSE AND user_id = $1', [id])
   })
-  // // TO DO: Running into some issues regarding the data type of the items being returned from the database
-  // .then((list) => {
-  //   sendTextMessage(sender, list + 'empty hello')
-  // })
+  .then((list) => {
+    console.log(list)
+    sendTextMessage(sender, list)
+  })
+  // TO DO: Running into some issues regarding the data type of the items being returned from the database
   .catch((error) => {
-    console.log('To do list Error', error)
+    console.log('To do list error', error)
   })
 }
 
