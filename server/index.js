@@ -125,7 +125,7 @@ function markAsDone(sender, itemNumber) {
 
 // Function to add item to to-do list
 function addItem(sender, item) {
-  return db.one('INSERT INTO todo(item) VALUES ($1)', [item])
+  return db.one('INSERT INTO todo(item) VALUES ($1) RETURNING item', [item])
   .then((item) => {
     console.log(item)
     sendTextMessage(sender, `${item} added!`)
