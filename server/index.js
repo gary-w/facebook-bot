@@ -126,7 +126,7 @@ function markAsDone(sender, itemNumber) {
 // Function to add item to to-do list
 function addItem(sender, item) {
   sendTextMessage(sender, `${item} added!`)
-  return db.query('INSERT INTO todo WHERE item = $1', item)
+  return db.query('INSERT INTO todo(item) VALUES ($1)', [item])
   .catch((error) => {
     console.log('Add item Error', error)
   })
