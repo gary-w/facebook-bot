@@ -108,8 +108,10 @@ function activeToDo(sender) {
     return db.query('SELECT item FROM todo WHERE status = FALSE AND user_id = $1', [id])
   })
   .then((result) => {
+    for (var i = 0; i < result.length; i++) {
+      sendTextMessage(sender, result[i].item)
+    }
     console.log(result[0].item)
-    sendTextMessage(sender, result[0].item)
   })
   // TO DO: Running into some issues regarding the data type of the items being returned from the database
   .catch((error) => {
