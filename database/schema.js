@@ -8,7 +8,7 @@ module.exports = (db) => {
     id SERIAL PRIMARY KEY, \
     item VARCHAR(500) NOT NULL, \
     status BOOLEAN NOT NULL DEFAULT FALSE, \
-    user_id INTEGER REFERENCES users(id) \
+    user_id VARCHAR(100) REFERENCES users(id) \
     );')    
   })
   .catch((error) => {

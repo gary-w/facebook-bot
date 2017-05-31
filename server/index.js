@@ -102,8 +102,7 @@ function addUser(sender) {
 
 // Function to return active to-do items with the same user_id as the sender
 function activeToDo(sender) {
-  let userId = parseInt(sender)
-  return db.query('SELECT id FROM users WHERE usertoken = $1', [userId])
+  return db.query('SELECT id FROM users WHERE usertoken = $1', [sender])
   .then((user_id) => {
     let id = parseInt(user_id)
     sendTextMessage(sender, id)
