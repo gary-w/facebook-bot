@@ -104,11 +104,8 @@ function addUser(sender) {
 function activeToDo(sender) {
   return db.query('SELECT id FROM users WHERE usertoken = $1', [sender])
   .then((result) => {
-    console.log(result)
-    for (var i = 0; i < result.length; i++) {
-      let id = parseInt(result[i].id)
-      return db.query('SELECT item FROM todo WHERE status = FALSE AND user_id = $1', [result[i].id])
-    }
+    let id = parseInt(result[0].id)
+    return db.query('SELECT item FROM todo WHERE status = FALSE AND user_id = $1', [id])
   })
   .then((list) => {
     console.log(list)
@@ -128,7 +125,11 @@ function markAsDone(sender, itemNumber) {
 
 // Function to add item to to-do list
 function addItem(sender, item) {
-  return db.one('INSERT INTO todo(item) VALUES ($1) RETURNING item', [item])
+  return db.query('INSERT INTO users (usertoken) VALUES ($1) ON CONFLICT (usertoken) DO NOTHING RETURNING id', [sender])
+  .then((result) => {
+    console.log('this is the id', result)
+    return db.one('INSERT INTO todo(item, user_id) VALUES ($1, $2) RETURNING item', [item, result])
+  })
   .then((result) => {
     console.log(result.item)
     sendTextMessage(sender, `${result.item} added!`)
