@@ -34,7 +34,7 @@ app.get('/webhook/', (req, res) => {
 // Post data to Facebook
 app.post('/webhook/', (req, res) => {
   let itemNumber = 4;
-  let item = 'Eat fruit'
+  let item = 'Workout'
 
   let messaging_events = req.body.entry[0].messaging
   for (let i = 0; i < messaging_events.length; i++) {
