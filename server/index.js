@@ -34,7 +34,7 @@ app.get('/webhook/', (req, res) => {
 // Post data to Facebook
 app.post('/webhook/', (req, res) => {
   let itemNumber = 4;
-  let item = 'Complete chatbot'
+  let item = 'Eat fruit'
 
   let messaging_events = req.body.entry[0].messaging
   for (let i = 0; i < messaging_events.length; i++) {
@@ -111,9 +111,7 @@ function activeToDo(sender) {
     for (var i = 0; i < result.length; i++) {
       sendTextMessage(sender, result[i].item)
     }
-    console.log(result[0].item)
   })
-  // TO DO: Running into some issues regarding the data type of the items being returned from the database
   .catch((error) => {
     console.log('To do list error', error)
   })
