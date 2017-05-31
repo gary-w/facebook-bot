@@ -105,8 +105,8 @@ function activeToDo(sender) {
   return db.query('SELECT id FROM users WHERE usertoken = $1', [sender])
   .then((result) => {
     console.log(result)
-    console.log('result', result.id)
-    let id = parseInt(result.id)
+    console.log('result', result[0].id)
+    let id = parseInt(result[0].id)
     console.log('id', id)
     sendTextMessage(sender, id)
     return db.query('SELECT item FROM todo WHERE status = FALSE AND user_id = $1', [id])
