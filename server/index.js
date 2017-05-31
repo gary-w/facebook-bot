@@ -54,7 +54,7 @@ app.post('/webhook/', (req, res) => {
         break
       // User adds an item to the to-do list
       } else if (text === `ADD ${item}`) {
-        addItem(sender, item, userID)
+        addItem(sender, item)
         break
       // User marks the whole list as DONE
       } else if (text === 'LIST DONE') {
@@ -124,9 +124,9 @@ function markAsDone(sender, itemNumber) {
 }
 
 // Function to add item to to-do list
-function addItem(sender, item, userID) {
+function addItem(sender, item) {
   sendTextMessage(sender, `${item} added!`)
-  return db.query('INSERT INTO todo (item, user_id) VALUES ($1, $2)', [item, userID])
+  return db.query('INSERT INTO todo (item, user_id) VALUES ($1, $2)', [item, user_id])
   .catch((error) => {
     console.log('Add item Error', error)
   })
