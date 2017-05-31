@@ -120,13 +120,13 @@ function activeToDo(sender) {
 // Function for user to mark items as complete
 function markAsDone(sender, itemNumber) {
   sendTextMessage(sender, `${itemNumber} done!`)
-  return db.query('UPDATE todo SET status = TRUE WHERE id = $1', [itemNumber])
+  return db.query('UPDATE todo SET status = TRUE WHERE id = $1', itemNumber)
 }
 
 // Function to add item to to-do list
 function addItem(sender, item) {
   sendTextMessage(sender, `${item} added!`)
-  return db.query('INSERT INTO todo (item) VALUES (Complete chatbot)')
+  return db.query('INSERT INTO todo WHERE item = $1', item)
   .catch((error) => {
     console.log('Add item Error', error)
   })
