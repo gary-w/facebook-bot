@@ -106,7 +106,7 @@ function activeToDo(sender) {
   .then((user_id) => {
     let id = parseInt(user_id)
     sendTextMessage(sender, id)
-    // return db.query('SELECT item FROM todo WHERE status = FALSE AND user_id = $1', [id])
+    return db.query('SELECT item FROM todo WHERE status = FALSE AND user_id = $1', [id])
   })
   // // TO DO: Running into some issues regarding the data type of the items being returned from the database
   // .then((list) => {
