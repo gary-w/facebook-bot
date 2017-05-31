@@ -127,8 +127,7 @@ function markAsDone(sender, itemNumber) {
 function addItem(sender, item) {
   return db.one('SELECT id FROM users WHERE usertoken = $1', sender)
   .then((result) => {
-    console.log('this is the id', result)
-    return db.one('INSERT INTO todo(item, user_id) VALUES ($1, $2) RETURNING item', [item, result])
+    return db.one('INSERT INTO todo(item, user_id) VALUES ($1, $2) RETURNING item', [item, result.id])
   })
   .then((result) => {
     console.log(result.item)
