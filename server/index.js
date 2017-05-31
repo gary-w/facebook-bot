@@ -126,7 +126,7 @@ function markAsDone(sender, itemNumber) {
 // Function to add item to to-do list
 function addItem(sender, item) {
   sendTextMessage(sender, `${item} added!`)
-  return db.query('INSERT INTO todo (item, status) VALUES ('Complete chatbot', FALSE)')
+  return db.query('INSERT INTO todo (item) VALUES (Complete chatbot)')
   .catch((error) => {
     console.log('Add item Error', error)
   })
