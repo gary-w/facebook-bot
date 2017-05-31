@@ -104,8 +104,11 @@ function addUser(sender) {
 function activeToDo(sender) {
   return db.query('SELECT id FROM users WHERE usertoken = $1', [sender])
   .then((result) => {
-    let id = parseInt(result[0].id)
-    return db.query('SELECT item FROM todo WHERE status = FALSE AND user_id = $1', [id])
+    console.log(result)
+    for (var i = 0; i < result.length; i++) {
+      let id = parseInt(result[i].id)
+      return db.query('SELECT item FROM todo WHERE status = FALSE AND user_id = $1', [result[i].id])
+    }
   })
   .then((list) => {
     console.log(list)
