@@ -113,14 +113,30 @@ function activeToDo(sender) {
     }
   })
   .catch((error) => {
-    console.log('To do list error', error)
+    console.log('Unable to retrieve all to-do list items: ', error)
   })
 }
 
 // Function for user to mark items as complete
 function markAsDone(sender, itemNumber) {
-  sendTextMessage(sender, `Your to-do item #${itemNumber} has been marked as done!`)
   return db.query('UPDATE todo SET status = TRUE WHERE id = $1', itemNumber)
+  .then(() => {
+    sendTextMessage(sender, `Your to-do item #${itemNumber} has been marked as done!`)
+  })
+  .catch((error) => {
+    console.log('Unable to mark as done: ', error)
+  })
+}
+
+// Function to delete items instead of marking as complete
+function deleteItem(sender, itemNumber) {
+  return db.result('DELETE FROM todo WHERE id = $1', itemNumber)
+  .then(() => {
+    sendTextMessage(sender, `Your to-do item #${itemNumber} has been deleted!`)
+  })
+  .catch((error) => {
+    console.log('Unable to delete item: ', error)
+  })
 }
 
 // Function to add item to to-do list
@@ -134,15 +150,21 @@ function addItem(sender, item) {
     sendTextMessage(sender, `Your to-do item '${result.item}' has been added!`)
   })
   .catch((error) => {
-    console.log('Add item Error', error)
+    console.log('Add item error: ', error)
   })
 }
 
 // Function for all items on to-do to be marked as done
 function markAllDone(sender) {
-  sendTextMessage(sender, 'Congratulations, all your to-do items are complete!')
   return db.query('UPDATE todo SET status = TRUE')
+  .then(() => {
+    sendTextMessage(sender, 'Congratulations, all your to-do items are complete!')
+  })
+  .catch((error) => {
+    console.log('There was an error marking all items as complete: ', error)
+  })
 }
+
 
 // Start server
 app.listen(app.get('port'), () => {
