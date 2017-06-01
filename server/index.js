@@ -33,7 +33,6 @@ app.get('/webhook/', (req, res) => {
 
 // Post data to Facebook
 app.post('/webhook/', (req, res) => {
-  let itemNumber = 4;
   let item = 'Workout'
 
   let messaging_events = req.body.entry[0].messaging
@@ -44,12 +43,14 @@ app.post('/webhook/', (req, res) => {
       let text = event.message.text
       // // Store user details in database
       addUser(sender)
+
       // User asks for active to-do list
       if (text === 'LIST'){ 
         activeToDo(sender)
         break
       // User marks a certain to-do list item as DONE
-      } else if (text === `${itemNumber} DONE`) {
+      } else if (text.endsWith('DONE')) {
+        var itemNumber = str.replace(/ \b\w*?DONE\w*?\b/g, '').split('#')[1]
         markAsDone(sender, itemNumber)
         break
       // User adds an item to the to-do list
