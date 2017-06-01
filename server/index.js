@@ -33,8 +33,6 @@ app.get('/webhook/', (req, res) => {
 
 // Post data to Facebook
 app.post('/webhook/', (req, res) => {
-  let item = 'Workout'
-
   let messaging_events = req.body.entry[0].messaging
   for (let i = 0; i < messaging_events.length; i++) {
     let event = req.body.entry[0].messaging[i]
@@ -54,7 +52,8 @@ app.post('/webhook/', (req, res) => {
         markAsDone(sender, itemNumber)
         break
       // User adds an item to the to-do list
-      } else if (text === `ADD ${item}`) {
+      } else if (text.startsWith('ADD')) {
+        let item = text.replace(/ \b\w*?ADD\w*?\b/g, '')
         addItem(sender, item)
         break
       // User marks the whole list as DONE
@@ -120,7 +119,7 @@ function activeToDo(sender) {
 
 // Function for user to mark items as complete
 function markAsDone(sender, itemNumber) {
-  sendTextMessage(sender, `${itemNumber} done!`)
+  sendTextMessage(sender, `Your to-do item #${itemNumber} has been marked as done!`)
   return db.query('UPDATE todo SET status = TRUE WHERE id = $1', itemNumber)
 }
 
@@ -132,7 +131,7 @@ function addItem(sender, item) {
   })
   .then((result) => {
     console.log(result.item)
-    sendTextMessage(sender, `${result.item} added!`)
+    sendTextMessage(sender, `Your to-do item: ${result.item} has been added!`)
   })
   .catch((error) => {
     console.log('Add item Error', error)
@@ -141,7 +140,7 @@ function addItem(sender, item) {
 
 // Function for all items on to-do to be marked as done
 function markAllDone(sender) {
-  sendTextMessage(sender, 'All done!')
+  sendTextMessage(sender, 'Congratulations, all your to-do items are complete!')
   return db.query('UPDATE todo SET status = TRUE')
 }
 
