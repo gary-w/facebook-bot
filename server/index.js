@@ -54,6 +54,7 @@ app.post('/webhook/', (req, res) => {
       // User adds an item to the to-do list
       } else if (text.startsWith('ADD')) {
         let item = text.replace(/ \b\w*?ADD\w*?\b/g, '')
+        console.log(item)
         addItem(sender, item)
         break
       // User marks the whole list as DONE
@@ -131,7 +132,8 @@ function addItem(sender, item) {
   })
   .then((result) => {
     console.log(result.item)
-    sendTextMessage(sender, `Your to-do item: ${result.item} has been added!`)
+    let item = result.item.replace(/ \b\w*?ADD\w*?\b/g, '')
+    sendTextMessage(sender, `Your to-do item: ${item} has been added!`)
   })
   .catch((error) => {
     console.log('Add item Error', error)
