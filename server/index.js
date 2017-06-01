@@ -54,7 +54,7 @@ app.post('/webhook/', (req, res) => {
       // User deletes a certain item
       } else if (text.endsWith('DELETE')) {
         let itemNumber = text.replace(/ \b\w*?DELETE\w*?\b/g, '').split('#')[1]
-        markAsDone(sender, itemNumber)
+        deleteItem(sender, itemNumber)
         break
       // User adds an item to the to-do list
       } else if (text.startsWith('ADD')) {
