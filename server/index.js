@@ -53,7 +53,7 @@ app.post('/webhook/', (req, res) => {
         break
       // User adds an item to the to-do list
       } else if (text.startsWith('ADD')) {
-        let item = text.replace(/ \b\w*ADD?\w*?\b/g, '')
+        let item = text.replace(/^\S+/g, '').trim()
         console.log(item)
         addItem(sender, item)
         break
