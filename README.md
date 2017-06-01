@@ -16,20 +16,13 @@ Type the following commands to interact with your very own To-do List chatbot!
 ## Sample Interaction
 
 **USER:** ADD Workout at the gym
-
-**BOT:** Your to-do item 'Workout at the gym' has been added!
-
-**USER:** ADD Take medicine
-
-**BOT:** Your to-do item 'Take medicine' has been added!
-
-**USER:** ADD Test out this awesome chatbot
-
-**BOT:** Your to-do item 'Test out this awesome chatbot' has been added!
-
-**USER:** ADD Drink lots of water
-
-**BOT:** Your to-do item 'Drink lots of water' has been added!
+  **BOT:** Your to-do item 'Workout at the gym' has been added!
+  **USER:** ADD Take medicine
+  **BOT:** Your to-do item 'Take medicine' has been added!
+  **USER:** ADD Test out this awesome chatbot
+  **BOT:** Your to-do item 'Test out this awesome chatbot' has been added!
+  **USER:** ADD Drink lots of water
+  **BOT:** Your to-do item 'Drink lots of water' has been added!
 
 
 **USER:** LIST
