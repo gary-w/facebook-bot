@@ -50,7 +50,7 @@ app.post('/webhook/', (req, res) => {
         break
       // User marks a certain to-do list item as DONE
       } else if (text.endsWith('DONE')) {
-        var itemNumber = str.replace(/ \b\w*?DONE\w*?\b/g, '').split('#')[1]
+        var itemNumber = text.replace(/ \b\w*?DONE\w*?\b/g, '').split('#')[1]
         markAsDone(sender, itemNumber)
         break
       // User adds an item to the to-do list
