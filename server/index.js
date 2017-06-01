@@ -51,6 +51,11 @@ app.post('/webhook/', (req, res) => {
         let itemNumber = text.replace(/ \b\w*?DONE\w*?\b/g, '').split('#')[1]
         markAsDone(sender, itemNumber)
         break
+      // User deletes a certain item
+      } else if (text.endsWith('DELETE')) {
+        let itemNumber = text.replace(/ \b\w*?DELETE\w*?\b/g, '').split('#')[1]
+        markAsDone(sender, itemNumber)
+        break
       // User adds an item to the to-do list
       } else if (text.startsWith('ADD')) {
         let item = text.replace(/^\S+/g, '').trim()
