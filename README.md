@@ -25,20 +25,20 @@ Type the following commands to interact with your very own To-do List chatbot!
 **BOT:** Your to-do item 'Drink lots of water' has been added!
 
 
-**USER:** LIST
-**BOT:** Workout at the gym
-**BOT:** Take medicine
-**BOT:** Test out this awesome chatbot
+**USER:** LIST  
+**BOT:** Workout at the gym  
+**BOT:** Take medicine  
+**BOT:** Test out this awesome chatbot  
 **BOT:** Drink lots of water
 
 
-**USER:** #1 DONE
-**BOT:** Your to-do item 'Workout at the gym' has been marked as done!
-**USER:** #2 DELETE
-**BOT:** Your to-do item 'Take medicine' has been deleted!
-**USER:** LIST
-**BOT:** Test out this awesome chatbot
+**USER:** #1 DONE  
+**BOT:** Your to-do item 'Workout at the gym' has been marked as done!  
+**USER:** #2 DELETE  
+**BOT:** Your to-do item 'Take medicine' has been deleted!  
+**USER:** LIST  
+**BOT:** Test out this awesome chatbot  
 **BOT:** Drink lots of water
 
-**USER:** SMASHED IT
+**USER:** SMASHED IT  
 **BOT:** Congratulations, all your to-do items are complete!
