@@ -39,7 +39,7 @@ app.post('/webhook/', (req, res) => {
     let sender = event.sender.id
     if (event.message && event.message.text) {
       let text = event.message.text
-      // // Store user details in database
+      // Store user details in database
       addUser(sender)
 
       // User asks for active to-do list
