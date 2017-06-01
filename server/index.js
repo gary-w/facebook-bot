@@ -56,8 +56,8 @@ app.post('/webhook/', (req, res) => {
         let item = text.replace(/^\S+/g, '').trim()
         addItem(sender, item)
         break
-      // User marks the whole list as DONE
-      } else if (text === 'LIST DONE') {
+      // User marks the whole list as SMASHED IT
+      } else if (text === 'SMASHED IT') {
         markAllDone(sender)
         break
       }
